@@ -211,7 +211,6 @@ class GameTest < Minitest::Test
 
   # Don't forget to define a constant VERSION inside of BookKeeping.
   def test_bookkeeping
-    skip
     assert_equal 1, BookKeeping::VERSION
   end
 end
