@@ -1,3 +1,5 @@
+require 'pry'
+
 class Crypto
   def initialize(text)
     @text = text
@@ -16,16 +18,20 @@ class Crypto
   end
 
   def ciphertext
-    ciphered = ""
-    segments = plaintext_segments
-    segments.first.length.times do |n|
-      segments.each do |segment|
-        ciphered << segment[n] if segment[n]
-      end
-    end
-    ciphered
+    transposed.join('')
   end
 
   def normalize_ciphertext
+    transposed.join(' ')
+  end
+
+  private
+
+  def transposed
+    chunk_size = size
+    chunks = plaintext_segments.map do |s|
+        Array.new(chunk_size) { |i| s[i] or '' }
+    end
+    chunks.transpose.map(&:join)
   end
 end
